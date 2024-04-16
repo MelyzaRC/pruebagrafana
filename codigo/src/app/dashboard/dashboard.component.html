@@ -1,0 +1,175 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-6 col-sm-6">
+            <h3>Conectar Servidor MQTT - Grupo No. 2</h3>
+            <button mat-raised-button type="submit" 
+              class="btn btn-success pull-left" (click)="createConnection()">
+              {{ isConnection ? 'Conectado' : 'Conectar' }}
+            </button>
+            <button mat-raised-button type="submit" 
+            class="btn btn-danger pull-left" (click)="destroyConnection()" *ngIf="isConnection">
+            Desconectar
+          </button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="row">
+       
+        <iframe src="http://3.137.180.239:3000/d-solo/cdisfmokjwagwa/ejemplo?orgId=1&from=1713225440667&to=1713247040667&panelId=1" width="450" height="200" frameborder="0"></iframe>
+        
+    </div>
+      <div class="row">
+        
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="card card-stats">
+                    <div class="card-header card-header-icon">
+                        <div class="card-icon bg-dark">
+                            <i class="material-icons">sensors</i>
+                        </div>
+                        <p class="card-category">Sensores (all)</p>
+                        <h3 class="card-title"></h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <button type="button" (click)="dataSensores('allSensors')" class="btn btn-success btn-sm">Ver Todos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+      </div>
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">device_thermostat</i>                         
+                      </div>
+                      <p class="card-category">Temperatura C</p>
+                      <h3 class="card-title">{{datos.tem}}
+                          <small>Grados</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <button type="button" (click)="dataSensores('temperatura')" class="btn btn-success btn-sm">Ver Temperatura</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">co2</i>
+                      </div>
+                      <p class="card-category">CO2 (ppm)</p>
+                      <h3 class="card-title">{{datos.co2}}
+                        <small>ppm</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <button type="button" (click)="dataSensores('co2')" class="btn btn-success btn-sm">Ver CO2</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">highlight</i>
+                          
+                      </div>
+                      <p class="card-category">Iluminacion</p>
+                      <h3 class="card-title">{{datos.luz}}-{{datos.desc_luz}}</h3>
+                      <h4>{{datos.desc_luz}}</h4>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        
+                        <button type="button" (click)="dataSensores('luz')" class="btn btn-success btn-sm">Ver Iluminacion</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-primary card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">straighten</i>
+                      </div>
+                      <p class="card-category">Distancia (cm)</p>
+                      <h3 class="card-title">{{datos.dis}}
+                        <small>cm</small>
+                        </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <button type="button" (click)="dataSensores('distancia')" class="btn btn-success btn-sm">Ver Distancia</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>  
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats ">
+                <div class="card-header  card-header-icon">
+                    <div class="card-icon bg-primary">
+                        <i class="material-icons">water_drop</i>
+                    </div>
+                    <p class="card-category">Humedad %</p>
+                    <h3 class="card-title">{{datos.hum}}
+                        <small>%</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <button type="button" (click)="dataSensores('humedad')" class="btn btn-success btn-sm">Ver Humedad</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons ">memory_alt</i>
+                      
+                    </div>
+                    <p class="card-category">EEPROM</p>
+                    <h3 class="card-title"></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <button type="button" (click)="doPublish('memoria','EEP'); showSaveData('top','center');" class="btn btn-success btn-sm">Guardar</button>
+                        <button type="button" (click)="verDatosMemoria()" class="btn btn-info btn-sm">Ver Datos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-icon">
+                    <div class="card-icon bg-dark">
+                        <span class="material-symbols-outlined"> mode_fan  </span>
+                    </div>
+                    <p class="card-category">Motor DC</p>
+                    <h3 class="card-title"></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <button type="button" (click)="doPublish('motor','#Motor:1')" class="btn btn-success btn-sm">Encender</button>
+                        <button type="button" (click)="doPublish('motor','#Motor:0')" class="btn btn-danger btn-sm">Apagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>    
+  </div>
+</div>

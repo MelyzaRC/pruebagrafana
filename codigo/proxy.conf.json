@@ -1,0 +1,8 @@
+{
+    "/grafana": {
+      "target": "https://mlzdrg792.grafana.net/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
